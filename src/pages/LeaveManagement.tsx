@@ -3,40 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Plus, CheckCircle, XCircle, Clock } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
 
 export default function LeaveManagement() {
-  const { toast } = useToast();
-  const [requests, setRequests] = useState([
+  const leaveRequests = [
     { id: 1, employee: "Sarah Johnson", type: "Vacation", from: "Jan 15, 2025", to: "Jan 20, 2025", days: 5, status: "pending" },
     { id: 2, employee: "Mike Chen", type: "Sick Leave", from: "Jan 12, 2025", to: "Jan 13, 2025", days: 2, status: "approved" },
     { id: 3, employee: "Emma Wilson", type: "Personal", from: "Jan 18, 2025", to: "Jan 19, 2025", days: 2, status: "pending" },
     { id: 4, employee: "John Doe", type: "Vacation", from: "Jan 10, 2025", to: "Jan 11, 2025", days: 2, status: "rejected" },
-  ]);
-  const handleRequestLeave = () => {
-    toast({
-      title: "Leave Request",
-      description: "Opening leave request form...",
-    });
-  };
-
-  const handleApprove = (id: number, employee: string) => {
-    setRequests(requests.map(r => r.id === id ? { ...r, status: "approved" } : r));
-    toast({
-      title: "Leave Approved",
-      description: `${employee}'s leave request has been approved.`,
-    });
-  };
-
-  const handleReject = (id: number, employee: string) => {
-    setRequests(requests.map(r => r.id === id ? { ...r, status: "rejected" } : r));
-    toast({
-      title: "Leave Rejected",
-      description: `${employee}'s leave request has been rejected.`,
-      variant: "destructive",
-    });
-  };
+  ];
 
   const leaveBalance = [
     { type: "Vacation", total: 20, used: 5, remaining: 15 },
@@ -77,7 +51,7 @@ export default function LeaveManagement() {
           <h2 className="text-3xl font-bold tracking-tight text-foreground">Leave Management</h2>
           <p className="text-muted-foreground">Manage time-off requests and leave balances</p>
         </div>
-        <Button onClick={handleRequestLeave}>
+        <Button>
           <Plus className="mr-2 h-4 w-4" />
           Request Leave
         </Button>
@@ -132,7 +106,7 @@ export default function LeaveManagement() {
               <TabsTrigger value="rejected">Rejected</TabsTrigger>
             </TabsList>
             <TabsContent value="all" className="space-y-4 mt-4">
-              {requests.map((request) => (
+              {leaveRequests.map((request) => (
                 <Card key={request.id} className="border-l-4 border-l-primary">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
@@ -152,21 +126,11 @@ export default function LeaveManagement() {
                         {getStatusBadge(request.status)}
                         {request.status === "pending" && (
                           <div className="flex gap-2">
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="text-success border-success hover:bg-success hover:text-success-foreground"
-                              onClick={() => handleApprove(request.id, request.employee)}
-                            >
+                            <Button size="sm" variant="outline" className="text-success border-success hover:bg-success hover:text-success-foreground">
                               <CheckCircle className="h-4 w-4 mr-1" />
                               Approve
                             </Button>
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground"
-                              onClick={() => handleReject(request.id, request.employee)}
-                            >
+                            <Button size="sm" variant="outline" className="text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground">
                               <XCircle className="h-4 w-4 mr-1" />
                               Reject
                             </Button>
@@ -179,7 +143,7 @@ export default function LeaveManagement() {
               ))}
             </TabsContent>
             <TabsContent value="pending" className="space-y-4 mt-4">
-              {requests.filter(r => r.status === "pending").map((request) => (
+              {leaveRequests.filter(r => r.status === "pending").map((request) => (
                 <Card key={request.id} className="border-l-4 border-l-warning">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
@@ -196,21 +160,11 @@ export default function LeaveManagement() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="text-success border-success hover:bg-success hover:text-success-foreground"
-                          onClick={() => handleApprove(request.id, request.employee)}
-                        >
+                        <Button size="sm" variant="outline" className="text-success border-success hover:bg-success hover:text-success-foreground">
                           <CheckCircle className="h-4 w-4 mr-1" />
                           Approve
                         </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground"
-                          onClick={() => handleReject(request.id, request.employee)}
-                        >
+                        <Button size="sm" variant="outline" className="text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground">
                           <XCircle className="h-4 w-4 mr-1" />
                           Reject
                         </Button>
@@ -220,53 +174,11 @@ export default function LeaveManagement() {
                 </Card>
               ))}
             </TabsContent>
-            <TabsContent value="approved" className="space-y-4 mt-4">
-              {requests.filter(r => r.status === "approved").length > 0 ? (
-                requests.filter(r => r.status === "approved").map((request) => (
-                  <Card key={request.id} className="border-l-4 border-l-success">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className="h-4 w-4 text-success mt-1" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold text-foreground">{request.employee}</h4>
-                            <Badge variant="outline">{request.type}</Badge>
-                          </div>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {request.from} - {request.to} ({request.days} days)
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <p className="text-sm text-muted-foreground">No approved leave requests</p>
-              )}
+            <TabsContent value="approved" className="mt-4">
+              <p className="text-sm text-muted-foreground">Approved leave requests will appear here</p>
             </TabsContent>
-            <TabsContent value="rejected" className="space-y-4 mt-4">
-              {requests.filter(r => r.status === "rejected").length > 0 ? (
-                requests.filter(r => r.status === "rejected").map((request) => (
-                  <Card key={request.id} className="border-l-4 border-l-destructive">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <XCircle className="h-4 w-4 text-destructive mt-1" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold text-foreground">{request.employee}</h4>
-                            <Badge variant="outline">{request.type}</Badge>
-                          </div>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {request.from} - {request.to} ({request.days} days)
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <p className="text-sm text-muted-foreground">No rejected leave requests</p>
-              )}
+            <TabsContent value="rejected" className="mt-4">
+              <p className="text-sm text-muted-foreground">Rejected leave requests will appear here</p>
             </TabsContent>
           </Tabs>
         </CardContent>

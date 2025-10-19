@@ -2,8 +2,6 @@ import { MetricCard } from "@/components/MetricCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, UserCheck, Calendar, TrendingUp, Clock, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
-import { toast } from "@/hooks/use-toast";
 
 export default function Dashboard() {
   const recentActivities = [
@@ -19,21 +17,6 @@ export default function Dashboard() {
     { id: 3, type: "Expense", user: "Wade Warren", date: "Jan 10, 2025" },
   ];
 
-  const handleApprove = (user: string, type: string) => {
-    toast({
-      title: "Approved",
-      description: `${type} for ${user} has been approved.`,
-    });
-  };
-
-  const handleDeny = (user: string, type: string) => {
-    toast({
-      title: "Denied",
-      description: `${type} for ${user} has been denied.`,
-      variant: "destructive",
-    });
-  };
-
   return (
     <div className="space-y-6">
       <div>
@@ -42,42 +25,34 @@ export default function Dashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Link to="/employees" className="block">
-          <MetricCard
-            title="Total Employees"
-            value={247}
-            icon={Users}
-            trend="+12 this month"
-            trendUp={true}
-          />
-        </Link>
-        <Link to="/attendance" className="block">
-          <MetricCard
-            title="Present Today"
-            value={234}
-            icon={UserCheck}
-            trend="94.7% attendance"
-            trendUp={true}
-          />
-        </Link>
-        <Link to="/leave" className="block">
-          <MetricCard
-            title="On Leave"
-            value={8}
-            icon={Calendar}
-            trend="3 pending requests"
-            trendUp={false}
-          />
-        </Link>
-        <Link to="/recruitment" className="block">
-          <MetricCard
-            title="Open Positions"
-            value={15}
-            icon={TrendingUp}
-            trend="5 interviews scheduled"
-            trendUp={true}
-          />
-        </Link>
+        <MetricCard
+          title="Total Employees"
+          value={247}
+          icon={Users}
+          trend="+12 this month"
+          trendUp={true}
+        />
+        <MetricCard
+          title="Present Today"
+          value={234}
+          icon={UserCheck}
+          trend="94.7% attendance"
+          trendUp={true}
+        />
+        <MetricCard
+          title="On Leave"
+          value={8}
+          icon={Calendar}
+          trend="3 pending requests"
+          trendUp={false}
+        />
+        <MetricCard
+          title="Open Positions"
+          value={15}
+          icon={TrendingUp}
+          trend="5 interviews scheduled"
+          trendUp={true}
+        />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -131,18 +106,8 @@ export default function Dashboard() {
                     <p className="text-xs text-muted-foreground">{approval.date}</p>
                   </div>
                   <div className="flex gap-2">
-                    <button 
-                      onClick={() => handleApprove(approval.user, approval.type)}
-                      className="text-xs text-success hover:underline"
-                    >
-                      Approve
-                    </button>
-                    <button 
-                      onClick={() => handleDeny(approval.user, approval.type)}
-                      className="text-xs text-destructive hover:underline"
-                    >
-                      Deny
-                    </button>
+                    <button className="text-xs text-success hover:underline">Approve</button>
+                    <button className="text-xs text-destructive hover:underline">Deny</button>
                   </div>
                 </div>
               ))}

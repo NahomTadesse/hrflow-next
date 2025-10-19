@@ -5,17 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, Plus, Mail, Phone, MapPin } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { toast } from "@/hooks/use-toast";
 
 export default function Employees() {
   const [searchQuery, setSearchQuery] = useState("");
-
-  const handleAddEmployee = () => {
-    toast({
-      title: "Add Employee",
-      description: "Employee creation form would open here.",
-    });
-  };
 
   const employees = [
     { id: 1, name: "Sarah Johnson", role: "Senior Software Engineer", department: "Engineering", email: "sarah.j@company.com", phone: "+1 234-567-8900", location: "New York", status: "active" },
@@ -43,7 +35,7 @@ export default function Employees() {
           <h2 className="text-3xl font-bold tracking-tight text-foreground">Employee Directory</h2>
           <p className="text-muted-foreground">Manage and view all employees</p>
         </div>
-        <Button onClick={handleAddEmployee}>
+        <Button>
           <Plus className="mr-2 h-4 w-4" />
           Add Employee
         </Button>

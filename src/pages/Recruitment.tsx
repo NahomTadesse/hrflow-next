@@ -2,19 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Users, UserCheck, FileText, Briefcase } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 export default function Recruitment() {
-  const { toast } = useToast();
-  const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
   const pipeline = [
     { stage: "Applied", count: 45, color: "bg-chart-1" },
     { stage: "Screening", count: 28, color: "bg-chart-2" },
@@ -30,22 +19,11 @@ export default function Recruitment() {
   ];
 
   const recentCandidates = [
-    { id: 1, name: "Alex Thompson", position: "Senior Frontend Developer", stage: "Interview", rating: 4.5, email: "alex.thompson@email.com", phone: "+1 (555) 123-4567", experience: "5 years" },
-    { id: 2, name: "Maria Garcia", position: "Product Manager", stage: "Screening", rating: 4.0, email: "maria.garcia@email.com", phone: "+1 (555) 234-5678", experience: "7 years" },
-    { id: 3, name: "James Wilson", position: "UX Designer", stage: "Offer", rating: 5.0, email: "james.wilson@email.com", phone: "+1 (555) 345-6789", experience: "4 years" },
-    { id: 4, name: "Sophie Chen", position: "Data Analyst", stage: "Applied", rating: 3.5, email: "sophie.chen@email.com", phone: "+1 (555) 456-7890", experience: "3 years" },
+    { id: 1, name: "Alex Thompson", position: "Senior Frontend Developer", stage: "Interview", rating: 4.5 },
+    { id: 2, name: "Maria Garcia", position: "Product Manager", stage: "Screening", rating: 4.0 },
+    { id: 3, name: "James Wilson", position: "UX Designer", stage: "Offer", rating: 5.0 },
+    { id: 4, name: "Sophie Chen", position: "Data Analyst", stage: "Applied", rating: 3.5 },
   ];
-
-  const handlePostJob = () => {
-    toast({
-      title: "Job Posting",
-      description: "Opening job posting form...",
-    });
-  };
-
-  const handleViewCandidate = (candidate: any) => {
-    setSelectedCandidate(candidate);
-  };
 
   return (
     <div className="space-y-6">
@@ -54,7 +32,7 @@ export default function Recruitment() {
           <h2 className="text-3xl font-bold tracking-tight text-foreground">Recruitment</h2>
           <p className="text-muted-foreground">Track applicants and manage job openings</p>
         </div>
-        <Button onClick={handlePostJob}>
+        <Button>
           <Plus className="mr-2 h-4 w-4" />
           Post New Job
         </Button>
@@ -137,7 +115,7 @@ export default function Recruitment() {
                           </div>
                         </div>
                       </div>
-                      <Button size="sm" variant="outline" onClick={() => handleViewCandidate(candidate)}>
+                      <Button size="sm" variant="outline">
                         <FileText className="h-4 w-4 mr-1" />
                         View
                       </Button>
@@ -149,51 +127,6 @@ export default function Recruitment() {
           </CardContent>
         </Card>
       </div>
-
-      <Dialog open={!!selectedCandidate} onOpenChange={() => setSelectedCandidate(null)}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle>{selectedCandidate?.name}</DialogTitle>
-            <DialogDescription>Candidate Profile</DialogDescription>
-          </DialogHeader>
-          {selectedCandidate && (
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-sm font-semibold text-muted-foreground">Position</h4>
-                <p className="text-foreground">{selectedCandidate.position}</p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-muted-foreground">Current Stage</h4>
-                <Badge variant="secondary">{selectedCandidate.stage}</Badge>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-muted-foreground">Experience</h4>
-                <p className="text-foreground">{selectedCandidate.experience}</p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-muted-foreground">Contact</h4>
-                <p className="text-sm text-foreground">{selectedCandidate.email}</p>
-                <p className="text-sm text-foreground">{selectedCandidate.phone}</p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-muted-foreground">Rating</h4>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className={`text-lg ${i < Math.floor(selectedCandidate.rating) ? 'text-warning' : 'text-muted'}`}>
-                      ★
-                    </span>
-                  ))}
-                  <span className="ml-2 text-sm text-muted-foreground">{selectedCandidate.rating}/5</span>
-                </div>
-              </div>
-              <div className="flex gap-2 pt-4">
-                <Button className="flex-1">Schedule Interview</Button>
-                <Button variant="outline" className="flex-1">Send Email</Button>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

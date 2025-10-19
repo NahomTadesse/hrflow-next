@@ -1,11 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Clock, CheckCircle, XCircle, Calendar, Download, Filter } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Clock, CheckCircle, XCircle, Calendar } from "lucide-react";
 
 export default function Attendance() {
-  const { toast } = useToast();
   const todayAttendance = [
     { id: 1, name: "Sarah Johnson", checkIn: "09:00 AM", status: "on-time" },
     { id: 2, name: "Mike Chen", checkIn: "09:15 AM", status: "late" },
@@ -43,37 +40,11 @@ export default function Attendance() {
     }
   };
 
-  const handleExport = () => {
-    toast({
-      title: "Exporting Data",
-      description: "Attendance report is being generated...",
-    });
-  };
-
-  const handleFilter = () => {
-    toast({
-      title: "Filters",
-      description: "Opening filter options...",
-    });
-  };
-
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">Attendance Tracking</h2>
-          <p className="text-muted-foreground">Monitor employee attendance and punctuality</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handleFilter}>
-            <Filter className="mr-2 h-4 w-4" />
-            Filter
-          </Button>
-          <Button onClick={handleExport}>
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
-        </div>
+      <div>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground">Attendance Tracking</h2>
+        <p className="text-muted-foreground">Monitor employee attendance and punctuality</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
