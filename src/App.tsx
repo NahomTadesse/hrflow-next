@@ -13,7 +13,9 @@ import Performance from "./pages/Performance";
 import Training from "./pages/Training";
 import OrgChart from "./pages/OrgChart";
 import Reports from "./pages/Reports";
-import ComingSoon from "./pages/ComingSoon";
+import Payroll from "./pages/Payroll";
+import Onboarding from "./pages/Onboarding";
+import Documents from "./pages/Documents";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,13 +30,13 @@ const App = () => (
           <Route path="/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
           <Route path="/employees" element={<DashboardLayout><Employees /></DashboardLayout>} />
           <Route path="/recruitment" element={<DashboardLayout><Recruitment /></DashboardLayout>} />
-          <Route path="/onboarding" element={<DashboardLayout><ComingSoon title="Onboarding" description="Streamline new employee onboarding process" /></DashboardLayout>} />
+          <Route path="/onboarding" element={<DashboardLayout><Onboarding /></DashboardLayout>} />
           <Route path="/leave" element={<DashboardLayout><LeaveManagement /></DashboardLayout>} />
           <Route path="/attendance" element={<DashboardLayout><Attendance /></DashboardLayout>} />
-          <Route path="/payroll" element={<DashboardLayout><ComingSoon title="Payroll" description="Manage employee compensation and payments" /></DashboardLayout>} />
+          <Route path="/payroll" element={<DashboardLayout><Payroll /></DashboardLayout>} />
           <Route path="/performance" element={<DashboardLayout><Performance /></DashboardLayout>} />
           <Route path="/training" element={<DashboardLayout><Training /></DashboardLayout>} />
-          <Route path="/documents" element={<DashboardLayout><ComingSoon title="Document Management" description="Store and manage HR documents securely" /></DashboardLayout>} />
+          <Route path="/documents" element={<DashboardLayout><Documents /></DashboardLayout>} />
           <Route path="/org-chart" element={<DashboardLayout><OrgChart /></DashboardLayout>} />
           <Route path="/reports" element={<DashboardLayout><Reports /></DashboardLayout>} />
           <Route path="*" element={<NotFound />} />
