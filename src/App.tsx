@@ -17,6 +17,8 @@ import Payroll from "./pages/Payroll";
 import Onboarding from "./pages/Onboarding";
 import Documents from "./pages/Documents";
 import NotFound from "./pages/NotFound";
+import GlobalChat from "./pages/GlobalChat";
+import DarkMode from "./pages/DarkMode";
 
 const queryClient = new QueryClient();
 
@@ -26,21 +28,111 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <DarkMode />
+
         <Routes>
-          <Route path="/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-          <Route path="/employees" element={<DashboardLayout><Employees /></DashboardLayout>} />
-          <Route path="/recruitment" element={<DashboardLayout><Recruitment /></DashboardLayout>} />
-          <Route path="/onboarding" element={<DashboardLayout><Onboarding /></DashboardLayout>} />
-          <Route path="/leave" element={<DashboardLayout><LeaveManagement /></DashboardLayout>} />
-          <Route path="/attendance" element={<DashboardLayout><Attendance /></DashboardLayout>} />
-          <Route path="/payroll" element={<DashboardLayout><Payroll /></DashboardLayout>} />
-          <Route path="/performance" element={<DashboardLayout><Performance /></DashboardLayout>} />
-          <Route path="/training" element={<DashboardLayout><Training /></DashboardLayout>} />
-          <Route path="/documents" element={<DashboardLayout><Documents /></DashboardLayout>} />
-          <Route path="/org-chart" element={<DashboardLayout><OrgChart /></DashboardLayout>} />
-          <Route path="/reports" element={<DashboardLayout><Reports /></DashboardLayout>} />
+          <Route
+            path="/"
+            element={
+              <DashboardLayout>
+                <Dashboard />
+              </DashboardLayout>
+            }
+          />
+
+          <Route
+            path="/employees"
+            element={
+              <DashboardLayout>
+                <Employees />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/recruitment"
+            element={
+              <DashboardLayout>
+                <Recruitment />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/onboarding"
+            element={
+              <DashboardLayout>
+                <Onboarding />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/leave"
+            element={
+              <DashboardLayout>
+                <LeaveManagement />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/attendance"
+            element={
+              <DashboardLayout>
+                <Attendance />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/payroll"
+            element={
+              <DashboardLayout>
+                <Payroll />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/performance"
+            element={
+              <DashboardLayout>
+                <Performance />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/training"
+            element={
+              <DashboardLayout>
+                <Training />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/documents"
+            element={
+              <DashboardLayout>
+                <Documents />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/org-chart"
+            element={
+              <DashboardLayout>
+                <OrgChart />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <DashboardLayout>
+                <Reports />
+              </DashboardLayout>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        <GlobalChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
