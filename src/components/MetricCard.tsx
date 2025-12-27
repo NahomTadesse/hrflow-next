@@ -9,7 +9,13 @@ interface MetricCardProps {
   trendUp?: boolean;
 }
 
-export function MetricCard({ title, value, icon: Icon, trend, trendUp }: MetricCardProps) {
+export function MetricCard({
+  title,
+  value,
+  icon: Icon,
+  trend,
+  trendUp,
+}: MetricCardProps) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -21,7 +27,11 @@ export function MetricCard({ title, value, icon: Icon, trend, trendUp }: MetricC
       <CardContent>
         <div className="text-2xl font-bold text-foreground">{value}</div>
         {trend && (
-          <p className={`text-xs ${trendUp ? 'text-success' : 'text-destructive'} mt-1`}>
+          <p
+            className={`text-xs ${
+              trendUp ? "text-success" : "text-destructive"
+            } mt-1`}
+          >
             {trend}
           </p>
         )}
