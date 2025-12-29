@@ -18,7 +18,7 @@ import Onboarding from "./pages/Onboarding";
 import Documents from "./pages/Documents";
 import NotFound from "./pages/NotFound";
 import GlobalChat from "./pages/GlobalChat";
-import DarkMode from "./pages/DarkMode";
+import EmployeSelfService from "./pages/EmployeeSelfService";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +28,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <DarkMode />
-
         <Routes>
           <Route
             path="/"
@@ -96,6 +94,7 @@ const App = () => (
               </DashboardLayout>
             }
           />
+
           <Route
             path="/training"
             element={
@@ -125,6 +124,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Reports />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/employee-self-service" // Must match sidebar exactly
+            element={
+              <DashboardLayout>
+                <EmployeSelfService />
               </DashboardLayout>
             }
           />
